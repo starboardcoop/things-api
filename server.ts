@@ -1,4 +1,5 @@
 import { Router, Application } from "https://deno.land/x/oak/mod.ts";
+import * as Things from "./things.ts"; 
 
 const router = new Router();
 
@@ -8,22 +9,7 @@ router.get('/', (ctx) => {
 
 // GET: all things
 router.get('/things', (ctx) => {
-    const things = {
-        things: [
-            {
-                name: 'Projector',
-                quantity: 1,
-                available: 1
-            },
-            {
-                name: '10-foot Ladder',
-                quantity: 2,
-                available: 1
-            }
-        ]
-    };
-
-    ctx.response.body = things;
+    ctx.response.body = Things.all();
 });
 
 const app = new Application();
