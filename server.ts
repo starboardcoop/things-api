@@ -12,6 +12,11 @@ router.get('/things', (ctx) => {
     ctx.response.body = Things.all();
 });
 
+// GET: all available things
+router.get('/things/available', (ctx) => {
+    ctx.response.body = Things.allAvailable();
+});
+
 const app = new Application();
 app.use(router.routes());
 app.use(router.allowedMethods());
