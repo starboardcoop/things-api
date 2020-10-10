@@ -17,6 +17,11 @@ router.get('/things/available', (ctx) => {
     ctx.response.body = Things.allAvailable();
 });
 
+// GET: thing by id
+router.get('/things/:id', (ctx) => {
+    ctx.response.body = Things.get(ctx.params.id);
+});
+
 const app = new Application();
 app.use(router.routes());
 app.use(router.allowedMethods());
