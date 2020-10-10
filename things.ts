@@ -3,21 +3,21 @@ const allThings = [
     {
         id: 0,
         name: 'Projector',
-        category: 'entertainment',
+        categories: ['entertainment'],
         quantity: 1,
         available: 1
     },
     {
         id: 1,
         name: '10-foot Ladder',
-        category: 'DIY',
+        categories: ['DIY'],
         quantity: 2,
         available: 1
     },
     {
         id: 2,
         name: 'Impact Gun',
-        category: 'DIY',
+        categories: ['DIY'],
         quantity: 2,
         available: 0
     }
