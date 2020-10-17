@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const thingsData = [
+let thingsData = [
     {
         id: "A",
         name: "Impact driver",
@@ -40,6 +40,17 @@ router.get('/:id', (req, res) => {
     const response = {
         status: "OK",
         things: thingsData.find(t => t.id == thingId)
+    }
+    res.send(response)
+})
+
+router.post('/', (req, res) => {
+    const thing = req.body
+    thingsData.push(thing)
+    
+    const response = {
+        status: "OK",
+        thing: thing
     }
     res.send(response)
 })
