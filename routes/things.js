@@ -73,4 +73,16 @@ router.put('/:id', (req, res) => {
     res.send(response)
 })
 
+router.delete('/:id', (req, res) => {
+    const thingId = req.params.id
+    const thing = thingsData.find(t => t.id == thingId)
+    thingsData = thingsData.filter(t => t.id != thingId)
+
+    const response = {
+        status: "OK",
+        thing: thing
+    }
+    res.send(response)
+})
+
 module.exports = router
