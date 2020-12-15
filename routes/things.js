@@ -5,7 +5,8 @@ const ThingsController = require('../controllers/things-controller')
 router.get('/', (req, res) => {
     const response = {
         status: "OK",
-        things: ThingsController.getAll()
+        things: ThingsController.getAll(),
+        categories: ThingsController.getCategories()
     }
     res.send(response)
 })
