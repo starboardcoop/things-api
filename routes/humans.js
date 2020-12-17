@@ -1,35 +1,40 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/sign-in", (req, res) => {
-  const response = {
-    status: "OK",
-    name: "Tim"
-  };
-  res.setHeader("Access-Control-Allow-Origin", "*"); // for testing purposes, should point to https://pvdthings.netlify.app prefereably
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  res.send(response);
-});
+let humans = [
+  {
+    name: "Siobhán",
+    phone: "4018888888"
+  }
+];
 
 router.post("/auth", (req, res) => {
   const { phone } = req.body;
   
-  console.log(`Authenticating ${phone}`);
+  console.log(`Authenticating ${phone} ...`);
   
-  let name = "Tim";
-  let status = "OK";
-  
-  if (phone.includes("401"))
-    name = "Siobhán";
-  else
-    status = "ERROR";
+  const member = humans.find(human => human.phone === phone);
+  const status = "OK";
   
   const response = {
     status: status,
-    name: name
+    member: member
+  }
+  
+  res.send(response);
+});
+
+router.post("/auth/code", (req, res) => {
+  const { phone, code } = req.body;
+  
+  console.log(`Authenticating ${phone} with code ${code} ...`);
+  
+  const member = humans.find(human => human.phone === phone);
+  const status = "OK";
+  
+  const response = {
+    status: status,
+    member: member
   }
   
   res.send(response);
