@@ -40,4 +40,25 @@ router.post("/auth/code", (req, res) => {
   res.send(response);
 });
 
+router.post("/auth/enroll", (req, res) => {
+  const { phone, name } = req.body;
+  
+  humans.push({
+    name: name,
+    phone: phone
+  })
+  
+  console.log(`Enrolling new member ${name} with ${phone} ...`);
+  
+  const member = humans.find(human => human.phone === phone);
+  const status = "OK";
+  
+  const response = {
+    status: status,
+    member: member
+  }
+  
+  res.send(response);
+});
+
 module.exports = router;
