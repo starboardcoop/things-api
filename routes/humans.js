@@ -21,6 +21,7 @@ router.post("/auth", (req, res) => {
   const { phone } = req.body;
   const status = 200;
   const member = humans.find(human => human.phone === phone);
+  auth.delete(phone);
 
   let response = {
     status: status,
@@ -60,8 +61,6 @@ router.post("/auth/code", (req, res) => {
   }, (err, result) => {
     response.status = result.status === '0' ? 200 : 401;
     console.log(err ? err : result)
-
-    auth.delete(phone);
 
     res.send(response);
   });
