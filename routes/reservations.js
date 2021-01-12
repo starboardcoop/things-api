@@ -22,6 +22,7 @@ router.get('/', (req, res) => {
     const response = {
         reservations: reservations
     }
+    
     res.send(response);
 });
 
@@ -29,6 +30,7 @@ router.get('/:id', (req, res) => {
     const response = {
         reservation: reservations.find(r => r._id === req.params.id)
     }
+
     res.send(response);
 });
 
@@ -49,6 +51,7 @@ router.put('/', (req, res) => {
     const response = {
         id: id
     }
+
     res.send(response);
 });
 
