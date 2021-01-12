@@ -72,4 +72,15 @@ router.patch('/:id', (req, res) => {
     res.send(response);
 });
 
+router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    reservations = reservations.filter(r => r._id != id)
+
+    const response = {
+        id: id
+    }
+
+    res.send(response);
+})
+
 module.exports = router
