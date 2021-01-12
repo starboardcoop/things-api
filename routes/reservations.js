@@ -33,18 +33,21 @@ router.get('/:id', (req, res) => {
 });
 
 router.put('/', (req, res) => {
+    const { person, thing, start, end } = req.body;
+
+    const id = (reservations.length + 1).toString();
     const r = {
-        _id: `${reservations.length + 1}`,
-        person: "Dilbert",
-        thing: "leaf blower",
-        start: "2/2/21",
-        end: "2/3/21"
+        _id: id,
+        person: person,
+        thing: thing,
+        start: start,
+        end: end
     }
     reservations.push(r);
-    console.log(`Reservation created: ${r}`);
+    console.log(`Reservation created: ${JSON.stringify(r)}`);
 
     const response = {
-        id: r._id
+        id: id
     }
     res.send(response);
 });
