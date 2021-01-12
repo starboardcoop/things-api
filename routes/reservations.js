@@ -52,4 +52,24 @@ router.put('/', (req, res) => {
     res.send(response);
 });
 
+router.patch('/:id', (req, res) => {
+    const { person, thing, start, end } = req.body;
+    const id = req.params.id;
+
+    let index = Number(id) - 1;
+    reservations[index] = {
+        _id: id,
+        person: person,
+        thing: thing,
+        start: start,
+        end: end
+    }
+
+    const response = {
+        id: id
+    }
+
+    res.send(response);
+});
+
 module.exports = router
