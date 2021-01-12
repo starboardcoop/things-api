@@ -32,4 +32,21 @@ router.get('/:id', (req, res) => {
     res.send(response);
 });
 
+router.put('/', (req, res) => {
+    const r = {
+        _id: `${reservations.length + 1}`,
+        person: "Dilbert",
+        thing: "leaf blower",
+        start: "2/2/21",
+        end: "2/3/21"
+    }
+    reservations.push(r);
+    console.log(`Reservation created: ${r}`);
+
+    const response = {
+        id: r._id
+    }
+    res.send(response);
+});
+
 module.exports = router
