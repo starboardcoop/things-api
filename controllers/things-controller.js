@@ -2,62 +2,72 @@ const diy = "DIY";
 const entertainment = "Entertainment";
 const cleaning = "Cleaning";
 const yard = "Yard";
+const outdoor = "Outdoor";
+const sports = "Sports"
 
 let data = [
     {
         id: "A",
-        name: "Cordless Drill",
-        available: 2,
-        category: diy,
-        img: "https://cdn.glitch.com/0314da88-37cc-4087-8079-ca1655ac7544%2Fcordless_drill.jpg?v=1604541586227",
-        price: "$110.00"
+        name: "Shovel",
+        available: 1,
+        category: yard,
+        img: "https://cdn.glitch.com/0314da88-37cc-4087-8079-ca1655ac7544%2Fshovel.jpeg?v=1616536300969",
+        price: "$20.00"
       
     },
     {
         id: "B",
-        name: "Ladder",
-        available: 1,
-        category: diy,
-        img: "https://cdn.glitch.com/0314da88-37cc-4087-8079-ca1655ac7544%2Fladder.jpg?v=1604541588898",
-        price: "$125.00"
-    },
-    {
-        id: "C",
-        name: "Steam Cleaner",
-        available: 0,
-        category: cleaning,
-        img: "https://cdn.glitch.com/0314da88-37cc-4087-8079-ca1655ac7544%2Fsteam_cleaner.jpeg?v=1603759185569",
-        price: "$469.00"
-    },
-    {
-        id: "D",
-        name: "Power Washer",
-        available: 1,
-        category: cleaning,
-        img: "https://cdn.glitch.com/0314da88-37cc-4087-8079-ca1655ac7544%2Fpower_washer.jpg?v=1604541587606",
+        name: "Kayak",
+        available: 2,
+        category: outdoor,
+        img: "https://cdn.glitch.com/0314da88-37cc-4087-8079-ca1655ac7544%2FKayak.jpg?v=1616536400383",
         price: "$300.00"
     },
     {
-        id: "E",
-        name: "Leaf Blower",
+        id: "C",
+        name: "Tennis Racket",
+        available: 2,
+        category: sports,
+        img: "https://cdn.glitch.com/0314da88-37cc-4087-8079-ca1655ac7544%2Ftennis-rack.jpg?v=1616536651404",
+        price: "$70.00"
+    },
+    {
+        id: "D",
+        name: "Folding Table",
         available: 1,
-        category: yard,
-        img: "https://cdn.glitch.com/0314da88-37cc-4087-8079-ca1655ac7544%2Fleaf_blower.jpg?v=1604541584978",
-        price: "$150.00"
+        category: entertainment,
+        img: "https://cdn.glitch.com/0314da88-37cc-4087-8079-ca1655ac7544%2Ffolding-table.jpeg?v=1616536827490",
+        price: "$30.00"
+    },
+    {
+        id: "E",
+        name: "Folding Chair",
+        available: 4,
+        category: entertainment,
+        img: "https://cdn.glitch.com/0314da88-37cc-4087-8079-ca1655ac7544%2Ffolding-chair.jpg?v=1616536828474",
+        price: "$10.00"
     },
     {
         id: "F",
-        name: "Projector",
+        name: "T-Shirt Heat Press",
         available: 1,
-        category: entertainment,
-        img: "https://cdn.glitch.com/0314da88-37cc-4087-8079-ca1655ac7544%2Fprojector.jpg?v=1604541590318",
-        price: "$800.00"
+        category: diy,
+        img: "https://cdn.glitch.com/0314da88-37cc-4087-8079-ca1655ac7544%2FTshirt-printer.jpg?v=1616537121084",
+        price: "$280.00"
+    },
+    {
+        id: "G",
+        name: "Step Ladder",
+        available: 1,
+        category: diy,
+        img: "https://cdn.glitch.com/0314da88-37cc-4087-8079-ca1655ac7544%2Fstep-ladder.jpg?v=1617240416841",
+        price: "$280.00"
     }
 ]
 
 const getAll = () => data
 
-const getCategories = () => ["DIY", "Entertainment", "Cleaning", "Yard"]
+const getCategories = () => ["DIY", "Entertainment", "Yard", "Outdoor", "Sports"]
 
 const getAvailable = () => data.filter(t => t.available > 0)
 
