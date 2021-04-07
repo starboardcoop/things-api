@@ -27,7 +27,23 @@ const getImage = (image) => {
     return image[0].thumbnails.large.url
 }
 
-const getCategories = () => ["DIY", "Entertainment", "Yard", "Outdoor", "Sports"]
+const getCategories = () => {
+    return [
+        "DIY",
+        "Media",
+        "Games",
+        "Outdoors",
+        "Sports",
+        "Entertainment",
+        "Yard",
+        "Cleaning",
+        "Cooking",
+        "Crafts",
+        "Pet",
+        "Automotive",
+        "Health"
+    ]
+}
 
 const getAvailable = () => data.filter(t => t.available > 0)
 
