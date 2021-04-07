@@ -17,7 +17,8 @@ const minify = (thing) => {
         id: thing.id,
         name: thing.fields.Name,
         categories: thing.fields.Category,
-        image: getImage(thing.fields.Image)
+        image: getImage(thing.fields.Image),
+        stock: thing.fields.Stock
     }
 }
 
