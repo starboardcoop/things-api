@@ -8,15 +8,22 @@ const getAll = async () => {
         fields: ["Name", "Category", "Stock", "Image"]
     }).firstPage()
 
+    console.log(result)
     return result.map(minify)
 }
 
 const minify = (thing) => {
     return {
-        name: thing.fields.Name,
         id: thing.id,
-        categories: thing.fields.Category
+        name: thing.fields.Name,
+        categories: thing.fields.Category,
+        image: getImage(thing.fields.Image)
     }
+}
+
+const getImage = (image) => {
+    if (!image) return null
+    return image[0].thumbnails.large.url
 }
 
 const getCategories = () => ["DIY", "Entertainment", "Yard", "Outdoor", "Sports"]
