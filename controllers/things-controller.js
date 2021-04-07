@@ -5,10 +5,10 @@ var table = base('Things')
 const getAll = async () => {
     const result =  await table.select({
         view: 'Grid view',
-        fields: ["Name", "Category", "Stock", "Image"]
+        fields: ["Name", "Category", "Stock", "Image"],
+        filterByFormula: "NOT({Hidden})"
     }).firstPage()
 
-    console.log(result)
     return result.map(minify)
 }
 
