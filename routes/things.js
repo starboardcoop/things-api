@@ -11,13 +11,4 @@ router.get('/', async (req, res) => {
     res.send(response)
 })
 
-router.get('/:id', (req, res) => {
-    const thingId = req.params.id
-    const response = {
-        status: "OK",
-        thing: ThingsController.get(thingId)
-    }
-    res.send(response)
-})
-
 module.exports = router
