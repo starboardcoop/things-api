@@ -11,4 +11,12 @@ router.get('/', async (req, res) => {
     res.send(response)
 })
 
+router.get('/ppl', async (req, res) => {
+    const response = {
+        status: "OK",
+        things: await ThingsController.getPPLInventory()
+    }
+    res.send(response)
+})
+
 module.exports = router

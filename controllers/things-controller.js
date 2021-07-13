@@ -1,12 +1,22 @@
 var Airtable = require('airtable') 
 var base = new Airtable({ apiKey: 'key7xmscTskxd2T75' }).base('appBYEa4vGVLAXEbe')
 const table = base('Things')
+const inventory = base('Inventory')
 
 const getAll = async () => {
     const result =  await table.select({
         view: 'Grid view',
         fields: ["Name", "Category", "Stock", "Image"],
         filterByFormula: "NOT({Hidden})"
+    }).firstPage()
+
+    return result.map(minify)
+}
+
+const getPPLInventory = async () => {
+    const result =  await table.select({
+        view: 'Grid view',
+        fields: ["Thing", "Location", "Brand", "Description", "Replacement Fee"]
     }).firstPage()
 
     return result.map(minify)
@@ -47,5 +57,6 @@ const getCategories = () => {
 
 module.exports = {
     getAll,
-    getCategories
+    getCategories,
+    getPPLInventory
 }
