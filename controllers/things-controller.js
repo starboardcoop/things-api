@@ -14,12 +14,12 @@ const getAll = async () => {
 }
 
 const getPPLInventory = async () => {
-    const result =  await table.select({
-        view: 'Grid view',
+    const result =  await inventory.select({
+        view: 'Things @ PPL',
         fields: ["Thing", "Location", "Brand", "Description", "Replacement Fee"]
     }).firstPage()
 
-    return result.map(minify)
+    return result.map(minifyPPL)
 }
 
 const minify = (thing) => {
@@ -29,6 +29,16 @@ const minify = (thing) => {
         categories: thing.fields.Category,
         image: getImage(thing.fields.Image),
         stock: thing.fields.Stock
+    }
+}
+
+const minifyPPL = (thing) => {
+    return {
+        thing: thing.thing,
+        location: thing.fields.Location,
+        brand: thing.fields.Brand,
+        description: thing.fields.Description,
+        replacementFee: thing.fields.ReplacementFee
     }
 }
 
@@ -58,5 +68,5 @@ const getCategories = () => {
 module.exports = {
     getAll,
     getCategories,
-    getPPLInventory
+    getPPLInventory 
 }
