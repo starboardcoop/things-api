@@ -4,8 +4,8 @@ const table = base('Things')
 
 const getAll = async () => {
     const result =  await table.select({
-        view: 'Grid view',
-        fields: ["Name", "Category", "Stock", "Image"],
+        view: 'All Things',
+        fields: ["Name", "Category", "Stock", "Location", "Image"],
         filterByFormula: "NOT({Hidden})"
     }).firstPage()
 
@@ -18,7 +18,8 @@ const minify = (thing) => {
         name: thing.fields.Name,
         categories: thing.fields.Category,
         image: getImage(thing.fields.Image),
-        stock: thing.fields.Stock
+        stock: thing.fields.Stock,
+        location: thing.fields.Location
     }
 }
 
@@ -45,7 +46,15 @@ const getCategories = () => {
     ]
 }
 
+const getLocations = () => {
+    return [
+        "Storage",
+        "PPL"
+    ]
+}
+
 module.exports = {
     getAll,
-    getCategories
+    getCategories,
+    getLocations
 }

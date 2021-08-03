@@ -6,7 +6,8 @@ router.get('/', async (req, res) => {
     const response = {
         status: "OK",
         things: await ThingsController.getAll(),
-        categories: ThingsController.getCategories()
+        categories: ThingsController.getCategories(),
+        locations: ThingsController.getLocations()
     }
     res.send(response)
 })
