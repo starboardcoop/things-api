@@ -1,6 +1,6 @@
 {
   "name": "things-api",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "server.js",
   "scripts": {
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/starboardcoop/things-api.git"
+    "url": "git+https://github.com/pvdthings/things-api.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/starboardcoop/things-api/issues"
+    "url": "https://github.com/pvdthings/things-api/issues"
   },
-  "homepage": "https://github.com/starboardcoop/things-api#readme",
+  "homepage": "https://github.com/pvdthings/things-api#readme",
   "dependencies": {
     "airtable": "^0.10.1",
     "body-parser": "^1.19.0",
