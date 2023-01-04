@@ -3,6 +3,11 @@
 ## Purpose
 The purpose of the Things API is to retrieve current catalog data from an Airtable base and then deliver it in a format that is optimized for the Things app.
 
+## Environment variables
+In order for the API to work, you'll need to set two environment variables:
++ `AIRTABLE_API_KEY`
++ `AIRTABLE_BASE_ID`
+
 ## Run the server
 ```bash
 npm run start
