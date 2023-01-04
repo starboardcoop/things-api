@@ -26,8 +26,7 @@ const getThings = (req, res) => {
         res.send({
             status: "OK",
             things: things,
-            categories: getCategories(),
-            locations: getLocations()
+            categories: getCategories()
         })
     }
 
@@ -45,8 +44,7 @@ const minify = (thing) => {
         name: thing.fields.Name,
         categories: thing.fields.Category,
         image: getImage(thing.fields.Image),
-        stock: thing.fields.Stock,
-        location: thing.fields.Location
+        stock: thing.fields.Stock
     }
 }
 
@@ -70,13 +68,6 @@ const getCategories = () => {
         "Pet",
         "Automotive",
         "Health"
-    ]
-}
-
-const getLocations = () => {
-    return [
-        "Storage",
-        "PPL"
     ]
 }
 
