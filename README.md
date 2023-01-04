@@ -5,7 +5,7 @@ The purpose of the Things API is to retrieve current catalog data from an Airtab
 
 ## Environment variables
 In order for the API to work, you'll need to set two environment variables:
-+ `AIRTABLE_API_KEY`
++ `AIRTABLE_KEY`
 + `AIRTABLE_BASE_ID`
 
 ## Run the server
