@@ -1,5 +1,5 @@
 var Airtable = require('airtable') 
-var base = new Airtable({ apiKey: 'key7xmscTskxd2T75' }).base('appBYEa4vGVLAXEbe')
+var base = new Airtable({ apiKey: process.env.AIRTABLE_KEY }).base(process.env.AIRTABLE_BASE_ID)
 const table = base('Things')
 
 const getThings = (req, res) => {
