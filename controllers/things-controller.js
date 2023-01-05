@@ -1,5 +1,7 @@
-var Airtable = require('airtable') 
-var base = new Airtable({ apiKey: process.env.AIRTABLE_KEY }).base(process.env.AIRTABLE_BASE_ID)
+const minify = require('../lib/minify')
+
+const Airtable = require('airtable') 
+const base = new Airtable({ apiKey: process.env.AIRTABLE_KEY }).base(process.env.AIRTABLE_BASE_ID)
 const table = base('Things')
 
 const getThings = (req, res) => {
@@ -36,21 +38,6 @@ const getThings = (req, res) => {
         filterByFormula: "NOT({Hidden})",
         pageSize: 100
     }).eachPage(processPage, processRecords)
-}
-
-const minify = (thing) => {
-    return {
-        id: thing.id,
-        name: thing.fields.Name,
-        categories: thing.fields.Category,
-        image: getImage(thing.fields.Image),
-        stock: thing.fields.Stock
-    }
-}
-
-const getImage = (image) => {
-    if (!image) return null
-    return image[0].thumbnails.large.url
 }
 
 const getCategories = () => {
