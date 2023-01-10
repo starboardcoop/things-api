@@ -30,7 +30,7 @@ npm run start
 **Response**
 ```ts
 {
-    status: "OK",
+    status: "OK", // [DEPRECATED]
     things: Thing[],
     categories: string[],
     locations: string[] // [DEPRECATED]
