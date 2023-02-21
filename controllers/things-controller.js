@@ -32,9 +32,7 @@ const getThings = (_, res) => {
     }
 
     table.select({
-        view: 'All Things',
-        fields: ["Name", "Category", "Stock", "Location", "Image"],
-        filterByFormula: "NOT({Hidden})",
+        view: 'api_by_popularity',
         pageSize: 100
     }).eachPage(processPage, processRecords)
 }
