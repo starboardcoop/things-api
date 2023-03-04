@@ -1,4 +1,6 @@
-const { inventory } = require('../db');
+const { base, Table } = require('../db');
+
+const inventory = base(Table.Inventory);
 
 const mapThing = (record) => {
     return {
