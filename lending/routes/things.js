@@ -1,4 +1,4 @@
-const { fetchThings } = require('../../services/things');
+const { fetchThings } = require('../../services/inventory');
 
 const express = require('express');
 const router = express.Router();

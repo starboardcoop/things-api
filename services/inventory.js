@@ -1,4 +1,4 @@
-const { things } = require('../db');
+const { inventory } = require('../db');
 
 const mapThing = (record) => {
     return {
@@ -9,7 +9,7 @@ const mapThing = (record) => {
 }
 
 const fetchThings = async () => {
-    const records = await things.select({
+    const records = await inventory.select({
         view: 'api_fetch_things',
         fields: ['ID', 'Name', 'Active Loans'],
         pageSize: 100
