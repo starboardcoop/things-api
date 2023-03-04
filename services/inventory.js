@@ -4,7 +4,6 @@ const inventory = base(Table.Inventory);
 
 const mapThing = (record) => {
     return {
-        airtableId: record.id,
         id: record.get('ID'),
         name: record.get('Name')[0],
         available: record.get('Active Loans') === 0
@@ -21,9 +20,15 @@ const fetchThings = async () => {
     return records.map((r) => mapThing(r));
 }
 
-const fetchThing = async ({ airtableId }) => {
-    const record = await inventory.find(airtableId);
-    return mapThing(record);
+const fetchThing = async ({ id }) => {
+    const records = await inventory.select({
+        view: 'api_fetch_things',
+        fields: ['ID', 'Name', 'Active Loans'],
+        filterByFormula: `{ID} = '${id}'`,
+        pageSize: 100
+    }).all();
+
+    return mapThing(records[0]);
 }
 
 module.exports = {

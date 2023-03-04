@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        res.send(await fetchThing({ airtableId: req.params.id }));
+        res.send(await fetchThing({ id: req.params.id }));
     } catch (error) {
         res.status(404).send({ errors: [error] });
     }
