@@ -1,4 +1,4 @@
-const { base, Table } = require('../db');
+const { base, Table, BorrowerIssue } = require('../db');
 
 const borrowers = base(Table.Borrowers);
 
@@ -16,9 +16,9 @@ const mapBorrower = (record) => {
 
 const mapIssues = (record) => {
     const issues = [];
-    if (!record.get('Dues Paid')) issues.push('duesNotPaid');
-    if (record.get('Overdue Loans') > 0) issues.push('overdueLoan');
-    if (record.get('Suspended')) issues.push('suspended');
+    if (!record.get('Dues Paid')) issues.push(BorrowerIssue.DuesNotPaid);
+    if (record.get('Overdue Loans') > 0) issues.push(BorrowerIssue.OverdueLoan);
+    if (record.get('Suspended')) issues.push(BorrowerIssue.Suspended);
 
     return issues;
 }
