@@ -4,6 +4,7 @@ const borrowers = base(Table.Borrowers);
 
 const mapBorrower = (record) => {
     return {
+        id: record.id,
         name: record.get('Name'),
         contact: {
             email: record.get('Email'),
@@ -40,6 +41,12 @@ const fetchBorrowers = async () => {
     return records.map(mapBorrower);
 }
 
+const fetchBorrower = async ({ id }) => {
+    const record = await borrowers.find(id);
+    return mapBorrower(record);
+}
+
 module.exports = {
-    fetchBorrowers
+    fetchBorrowers,
+    fetchBorrower
 };
