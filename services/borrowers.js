@@ -9,8 +9,17 @@ const mapBorrower = (record) => {
             email: record.get('Email'),
             phone: record.get('Phone')
         },
-        issues: []
+        issues: mapIssues(record)
     }
+}
+
+const mapIssues = (record) => {
+    const issues = [];
+    if (!record.get('Dues Paid')) issues.push('duesNotPaid');
+    if (record.get('Overdue Loans') > 0) issues.push('overdueLoan');
+    if (record.get('Suspended')) issues.push('suspended');
+
+    return issues;
 }
 
 const fetchBorrowers = async () => {
