@@ -3,7 +3,8 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-const things = require('./routes/things')
+const things = require('./borrowing/routes/things')
+const lending = require('./lending')
 
 app.use(bodyParser.json())
 
@@ -23,6 +24,7 @@ app.get('/', (_, res) => {
 })
 
 app.use('/things', things)
+app.use('/lending', lending)
 
 app.listen(3000, () => {
     console.log('Things API listening at http://localhost:3000')
