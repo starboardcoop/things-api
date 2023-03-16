@@ -4,7 +4,8 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    res.send(await fetchLoans());
+    const includeClosedLoans = req.query['closed'];
+    res.send(await fetchLoans({ includeClosed: includeClosedLoans}));
 });
 
 // router.get('/:id', async (req, res) => {
