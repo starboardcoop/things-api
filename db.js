@@ -3,7 +3,8 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_KEY }).base(process.env
 
 const Table = {
     Inventory: 'Inventory',
-    Borrowers: 'Members'
+    Borrowers: 'Members',
+    Loans: 'Loans'
 };
 
 const BorrowerIssue = {
