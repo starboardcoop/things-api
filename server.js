@@ -5,6 +5,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const things = require('./borrowing/routes/things')
 const lending = require('./lending')
+const auth = require('./auth/routes/token')
 
 app.use(bodyParser.json())
 
@@ -25,6 +26,7 @@ app.get('/', (_, res) => {
 
 app.use('/things', things)
 app.use('/lending', lending)
+app.use('/auth', auth)
 
 app.listen(3000, () => {
     console.log('Things API listening at http://localhost:3000')
