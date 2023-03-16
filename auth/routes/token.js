@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { tokens } = require('../store');
+const { authorize, isAuthorized } = require('../index');
 const { createClient } = require('@supabase/supabase-js');
 
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_PUB_ANON_KEY);
@@ -8,7 +8,7 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_PUB
 router.post('/token', async (req, res) => {
     const token = req.headers['authorization'];
 
-    if (Object.keys(tokens).includes(token)) {
+    if (isAuthorized(token)) {
         res.status(200).send();
     }
 
@@ -20,10 +20,7 @@ router.post('/token', async (req, res) => {
         res.status(401).send();
     }
 
-    tokens[token] = {
-        valid: true
-    };
-
+    authorize(token);
     res.status(200).send();
 });
 

@@ -1,9 +1,9 @@
-const { tokens } = require('../store');
+const { isAuthorized } = require('../index');
 
 const authenticateToken = (req, res, next) => {
     const token = req.headers['authorization'];
     
-    if (!Object.keys(tokens).includes(token)) {
+    if (!isAuthorized(token)) {
         res.status(401).send();
     } else {
         next();
