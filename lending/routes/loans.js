@@ -1,4 +1,4 @@
-const { fetchLoans } = require('../../services/loans');
+const { fetchLoans, fetchLoan } = require('../../services/loans');
 
 const express = require('express');
 const router = express.Router();
@@ -8,12 +8,13 @@ router.get('/', async (req, res) => {
     res.send(await fetchLoans({ includeClosed: includeClosedLoans}));
 });
 
-// router.get('/:id', async (req, res) => {
-//     try {
-//         res.send(await fetchThing({ id: req.params.id }));
-//     } catch (error) {
-//         res.status(404).send({ errors: [error] });
-//     }
-// });
+router.get('/:loanId/:thingId', async (req, res) => {
+    const loan = await fetchLoan({ loanId: req.params.loanId, thingId: req.params.thingId });
+    if (loan) {
+        res.send(loan);
+    } else {
+        res.status(404).send();
+    }
+});
 
 module.exports = router;

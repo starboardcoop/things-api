@@ -4,7 +4,8 @@ const inventory = base(Table.Inventory);
 
 const mapThing = (record) => {
     return {
-        id: record.get('ID'),
+        id: record.id,
+        number: record.get('ID'),
         name: record.get('Name')[0],
         available: record.get('Active Loans') === 0
     };
