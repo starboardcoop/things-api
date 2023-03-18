@@ -18,7 +18,10 @@ const mapLoan = (loan, thingId) => {
             id: thingId,
             number: Number(thingNumber),
             name: thingNames[thingIndex]
-        }
+        },
+        checkedOutDate: loan.get('Checked Out'),
+        checkedInDate: loan.get('checked_in_date'),
+        dueBackDate: loan.get('Due Back')
     };
 };
 
