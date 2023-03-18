@@ -1,4 +1,4 @@
-const { fetchLoans, fetchLoan, createLoan } = require('../../services/loans');
+const { fetchLoans, fetchLoan, createLoan, updateLoan } = require('../../services/loans');
 
 const express = require('express');
 const router = express.Router();
@@ -17,9 +17,23 @@ router.get('/:loanId/:thingId', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.put('/', async (req, res) => {
     try {
         await createLoan(req.body);
+        res.status(201).send();
+    } catch (error) {
+        console.error(error);
+        res.status(500).send();
+    }
+});
+
+router.patch('/:loanId/:thingId', async (req, res) => {
+    try {
+        await updateLoan({
+            loanId: req.params.loanId,
+            thingId: req.params.thingId,
+            ...req.body
+        });
         res.status(201).send();
     } catch (error) {
         console.error(error);

@@ -70,8 +70,32 @@ const createLoan = async ({
     ]);
 };
 
+const updateLoan = async ({
+    loanId,
+    thingId,
+    dueBackDate,
+    checkedInDate // <- We can't use the value until we shift to the [1 Loan]:[1 Thing] paradigm
+}) => {
+    const loan = await loans.find(loanId);
+
+    const fields = {};
+    fields["Due Back"] = dueBackDate;
+
+    if (checkedInDate) {
+        fields["Returned Things"] = [...loan.get("Returned Things"), thingId];
+    }
+
+    await loans.update([
+        {
+            "id": loanId,
+            fields
+        }
+    ]);
+};
+
 module.exports = {
     fetchLoans,
     fetchLoan,
-    createLoan
+    createLoan,
+    updateLoan
 };
