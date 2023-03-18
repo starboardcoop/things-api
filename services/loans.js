@@ -48,7 +48,30 @@ const fetchLoan = async ({ loanId, thingId }) => {
     return loan ? mapLoan(loan, thingId) : null;
 };
 
+const createLoan = async ({
+    borrowerId,
+    thingIds,
+    checkedOutDate,
+    dueBackDate,
+    notes
+}) => {
+    await loans.create([
+        {
+            "fields": {
+              "Borrower": [borrowerId],
+              "Things": thingIds,
+              "Checked Out": checkedOutDate,
+              "Due Back": dueBackDate,
+              "Status": "Active",
+              "Returned Things": [],
+              "Notes": notes ?? "This loan was opened by the PVD Things API."
+            }
+        }
+    ]);
+};
+
 module.exports = {
     fetchLoans,
-    fetchLoan
+    fetchLoan,
+    createLoan
 };
