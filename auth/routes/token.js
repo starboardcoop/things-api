@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { authorize, isAuthorized } = require('../index');
+const { authorize, isAuthorized, isWhitelisted } = require('../index');
 const { createClient } = require('@supabase/supabase-js');
 
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_PUB_ANON_KEY);
@@ -15,8 +15,8 @@ router.post('/token', async (req, res) => {
     const userResponse = await supabase.auth.getUser(token);
     const user = userResponse.data.user;
 
-    if (!user) {
-        console.error(`Invalid Token:\t ${userResponse.error}`)
+    if (!user || !isWhitelisted(user.email)) {
+        console.error(`Invalid Token:\t ${userResponse.error ?? 'NO ENTRY'}`)
         res.status(401).send();
     }
 
