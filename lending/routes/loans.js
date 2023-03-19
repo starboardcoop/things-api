@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     const includeClosedLoans = req.query['closed'];
-    res.send(await fetchLoans({ includeClosed: includeClosedLoans}));
+    res.send(await fetchLoans({ includeClosed: includeClosedLoans }));
 });
 
 router.get('/:loanId/:thingId', async (req, res) => {
@@ -19,11 +19,11 @@ router.get('/:loanId/:thingId', async (req, res) => {
 
 router.put('/', async (req, res) => {
     try {
-        await createLoan(req.body);
-        res.status(201).send();
+        const newLoanId = await createLoan(req.body);
+        res.status(201).send({ id: newLoanId });
     } catch (error) {
         console.error(error);
-        res.status(500).send();
+        res.status(500).send({ error });
     }
 });
 
@@ -37,7 +37,7 @@ router.patch('/:loanId/:thingId', async (req, res) => {
         res.status(200).send();
     } catch (error) {
         console.error(error);
-        res.status(500).send();
+        res.status(500).send({ error });
     }
 });
 
