@@ -34,7 +34,7 @@ router.patch('/:loanId/:thingId', async (req, res) => {
             thingId: req.params.thingId,
             ...req.body
         });
-        res.status(201).send();
+        res.status(200).send();
     } catch (error) {
         console.error(error);
         res.status(500).send();
