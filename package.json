@@ -1,5 +1,5 @@
 {
-  "name": "things-api",
+  "name": "pvdthings-api",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pvdthings/things-api.git"
+    "url": "git+https://github.com/pvdthings/api.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/pvdthings/things-api/issues"
+    "url": "https://github.com/pvdthings/api/issues"
   },
-  "homepage": "https://github.com/pvdthings/things-api#readme",
+  "homepage": "https://github.com/pvdthings/api#readme",
   "dependencies": {
     "@supabase/supabase-js": "^2.10.0",
     "airtable": "^0.10.1",
