@@ -79,8 +79,13 @@ const updateLoan = async ({
     const fields = {};
     fields["Due Back"] = dueBackDate;
 
-    if (checkedInDate) {
-        const returnedThings = loan.get("Returned Things") ?? [];
+    const returnedThings = loan.get("Returned Things") ?? [];
+
+    if (checkedInDate === '') {
+        fields["Returned Things"] = returnedThings.filter(t => t.id === thingId);
+    }
+
+    if (checkedInDate && checkedInDate !== '') {
         fields["Returned Things"] = [...returnedThings, thingId];
     }
 
