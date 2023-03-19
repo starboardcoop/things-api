@@ -48,7 +48,58 @@ const fetchLoan = async ({ loanId, thingId }) => {
     return loan ? mapLoan(loan, thingId) : null;
 };
 
+const createLoan = async ({
+    borrowerId,
+    thingIds,
+    checkedOutDate,
+    dueBackDate,
+    notes
+}) => {
+    const loan = await loans.create({
+        "Borrower": [borrowerId],
+        "Things": thingIds,
+        "Checked Out": checkedOutDate,
+        "Due Back": dueBackDate,
+        "Status": "Active",
+        "Returned Things": [],
+        "Notes": notes ?? "This loan was opened by the PVD Things API."
+    });
+
+    return loan.id;
+};
+
+const updateLoan = async ({
+    loanId,
+    thingId,
+    dueBackDate,
+    checkedInDate // <- We can't use the value until we shift to the [1 Loan]:[1 Thing] paradigm
+}) => {
+    const loan = await loans.find(loanId);
+
+    const fields = {};
+    fields["Due Back"] = dueBackDate;
+
+    const returnedThings = loan.get("Returned Things") ?? [];
+
+    if (checkedInDate === '') {
+        fields["Returned Things"] = returnedThings.filter(t => t.id === thingId);
+    }
+
+    if (checkedInDate && checkedInDate !== '') {
+        fields["Returned Things"] = [...returnedThings, thingId];
+    }
+
+    await loans.update([
+        {
+            "id": loanId,
+            fields
+        }
+    ]);
+};
+
 module.exports = {
     fetchLoans,
-    fetchLoan
+    fetchLoan,
+    createLoan,
+    updateLoan
 };

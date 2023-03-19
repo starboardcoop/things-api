@@ -1,11 +1,11 @@
-const { fetchLoans, fetchLoan } = require('../../services/loans');
+const { fetchLoans, fetchLoan, createLoan, updateLoan } = require('../../services/loans');
 
 const express = require('express');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
     const includeClosedLoans = req.query['closed'];
-    res.send(await fetchLoans({ includeClosed: includeClosedLoans}));
+    res.send(await fetchLoans({ includeClosed: includeClosedLoans }));
 });
 
 router.get('/:loanId/:thingId', async (req, res) => {
@@ -14,6 +14,30 @@ router.get('/:loanId/:thingId', async (req, res) => {
         res.send(loan);
     } else {
         res.status(404).send();
+    }
+});
+
+router.put('/', async (req, res) => {
+    try {
+        const newLoanId = await createLoan(req.body);
+        res.status(201).send({ id: newLoanId });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ error });
+    }
+});
+
+router.patch('/:loanId/:thingId', async (req, res) => {
+    try {
+        await updateLoan({
+            loanId: req.params.loanId,
+            thingId: req.params.thingId,
+            ...req.body
+        });
+        res.status(200).send();
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ error });
     }
 });
 
