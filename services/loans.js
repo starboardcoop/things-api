@@ -55,19 +55,17 @@ const createLoan = async ({
     dueBackDate,
     notes
 }) => {
-    await loans.create([
-        {
-            "fields": {
-              "Borrower": [borrowerId],
-              "Things": thingIds,
-              "Checked Out": checkedOutDate,
-              "Due Back": dueBackDate,
-              "Status": "Active",
-              "Returned Things": [],
-              "Notes": notes ?? "This loan was opened by the PVD Things API."
-            }
-        }
-    ]);
+    const loan = await loans.create({
+        "Borrower": [borrowerId],
+        "Things": thingIds,
+        "Checked Out": checkedOutDate,
+        "Due Back": dueBackDate,
+        "Status": "Active",
+        "Returned Things": [],
+        "Notes": notes ?? "This loan was opened by the PVD Things API."
+    });
+
+    return loan.id;
 };
 
 const updateLoan = async ({
@@ -82,7 +80,8 @@ const updateLoan = async ({
     fields["Due Back"] = dueBackDate;
 
     if (checkedInDate) {
-        fields["Returned Things"] = [...loan.get("Returned Things"), thingId];
+        const returnedThings = loan.get("Returned Things") ?? [];
+        fields["Returned Things"] = [...returnedThings, thingId];
     }
 
     await loans.update([
