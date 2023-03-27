@@ -29,7 +29,7 @@ const fetchLoans = async ({ includeClosed }) => {
     const view = includeClosed ? 'api_all_loans' : 'api_open_loans';
     const results = await loans.select({
         view: view,
-        fields: ['Loan', 'Borrower', 'Borrower Name', 'Things', 'Borrowed Things', 'Checked Out', 'checked_in_date', 'Due Back', 'thing_numbers'],
+        fields: ['Loan', 'Borrower', 'Borrower Name', 'Things', 'Borrowed Things', 'Returned Things', 'Checked Out', 'checked_in_date', 'Due Back', 'thing_numbers'],
         pageSize: 100
     }).all();
 
@@ -37,7 +37,9 @@ const fetchLoans = async ({ includeClosed }) => {
 
     // Because of the Airtable schema, we have to map each record to multiple loans, one for each thing
     results.forEach(r => {
-        r.get('Things').forEach(thingId => fetchedLoans.push(mapLoan(r, thingId)));
+        const returnedThings = r.get('Returned Things') || [];
+        r.get('Things').filter(t => !returnedThings.includes(t))
+            .forEach(thingId => fetchedLoans.push(mapLoan(r, thingId)));
     });
 
     return fetchedLoans;
@@ -77,7 +79,10 @@ const updateLoan = async ({
     const loan = await loans.find(loanId);
 
     const fields = {};
-    fields["Due Back"] = dueBackDate;
+    
+    if (dueBackDate && dueBackDate !== '') {
+        fields["Due Back"] = dueBackDate;
+    }
 
     const returnedThings = loan.get("Returned Things") ?? [];
 

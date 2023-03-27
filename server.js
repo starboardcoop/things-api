@@ -5,19 +5,16 @@ const app = express()
 const bodyParser = require('body-parser')
 const things = require('./borrowing/routes/things')
 const lending = require('./lending')
-const auth = require('./auth/routes/token')
 
 app.use(bodyParser.json())
 
-app.use((req, res, next) => {
-    const apiKey = process.env.API_KEY
-    const clientKey = req.headers['key']
-    
-    if (apiKey !== clientKey) {
-        res.status(401).send()
-    } else {
-        next()
-    }
+app.all('*', (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, supabase-access-token, supabase-refresh-token");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH")
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header("Access-Control-Allow-Private-Network", "true");
+    next();
 })
 
 app.get('/', (_, res) => {
@@ -26,7 +23,6 @@ app.get('/', (_, res) => {
 
 app.use('/things', things)
 app.use('/lending', lending)
-app.use('/auth', auth)
 
 app.listen(3000, () => {
     console.log('Things API listening at http://localhost:3000')
