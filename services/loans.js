@@ -64,7 +64,7 @@ const createLoan = async ({
         "Due Back": dueBackDate,
         "Status": "Active",
         "Returned Things": [],
-        "Notes": notes ?? "This loan was opened by the PVD Things API."
+        "Notes": notes || "This loan was opened by the PVD Things API."
     });
 
     return loan.id;
@@ -84,7 +84,7 @@ const updateLoan = async ({
         fields["Due Back"] = dueBackDate;
     }
 
-    const returnedThings = loan.get("Returned Things") ?? [];
+    const returnedThings = loan.get("Returned Things") || [];
 
     if (checkedInDate === '') {
         fields["Returned Things"] = returnedThings.filter(t => t.id === thingId);

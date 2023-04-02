@@ -24,6 +24,6 @@ app.get('/', (_, res) => {
 app.use('/things', things)
 app.use('/lending', lending)
 
-app.listen(3000, () => {
-    console.log('Things API listening at http://localhost:3000')
+app.listen(8080, () => {
+    console.log('Things API listening at http://localhost:8080')
 })
