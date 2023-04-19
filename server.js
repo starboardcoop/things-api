@@ -1,12 +1,13 @@
-require('dotenv').config()
+require('dotenv').config();
 
-const express = require('express')
-const app = express()
-const bodyParser = require('body-parser')
-const things = require('./borrowing/routes/things')
-const lending = require('./lending')
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const auth = require('./auth');
+const things = require('./borrowing/routes/things');
+const lending = require('./lending');
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.all('*', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -18,12 +19,12 @@ app.all('*', (req, res, next) => {
 })
 
 app.get('/', (_, res) => {
-    res.send('You have reached the Things API')
-})
-
-app.use('/things', things)
-app.use('/lending', lending)
+    res.send('You have reached the Things API');
+});
+app.use('/things', things);
+app.use('/lending', lending);
+app.use('/auth', auth);
 
 app.listen(8080, () => {
-    console.log('Things API listening at http://localhost:8080')
-})
+    console.log('Things API listening at http://localhost:8080');
+});

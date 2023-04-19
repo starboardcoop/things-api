@@ -1,4 +1,5 @@
 const { createClient } = require('@supabase/supabase-js');
+const { isWhitelisted } = require('../services/auth');
 
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_PUB_ANON_KEY, {
     auth: {
@@ -7,11 +8,6 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_PUB
         persistSession: false, // All our access is from server, so no need to persist the session to browser's local storage
     }
 });
-
-const isWhitelisted = (email) => {
-    const whitelist = process.env.DISCORD_WHITELIST.split(' ');
-    return whitelist.includes(email);
-};
 
 const authenticateToken = async (req, res, next) => {
     const environment = process.env.NODE_ENV || 'development';
