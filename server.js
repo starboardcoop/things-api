@@ -25,6 +25,6 @@ app.use('/things', things);
 app.use('/lending', lending);
 app.use('/auth', auth);
 
-app.listen(8080, () => {
-    console.log('Things API listening at http://localhost:8080');
+app.listen(8088, () => {
+    console.log('Things API listening at http://localhost:8088');
 });
