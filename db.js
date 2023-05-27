@@ -10,7 +10,8 @@ const Table = {
 const BorrowerIssue = {
     DuesNotPaid: 'duesNotPaid',
     OverdueLoan: 'overdueLoan',
-    Suspended: 'suspended'
+    Suspended: 'suspended',
+    NeedsLiabilityWaiver: 'needsLiabilityWaiver'
 };
 
 module.exports = {
