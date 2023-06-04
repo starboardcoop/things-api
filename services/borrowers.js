@@ -16,7 +16,7 @@ const mapBorrower = (record) => {
 
 const mapIssues = (record) => {
     const issues = [];
-    if (!record.get('Dues Paid')) issues.push(BorrowerIssue.DuesNotPaid);
+    if (Number(record.get('transactions_past_year')) < 1) issues.push(BorrowerIssue.DuesNotPaid);
     if (!record.get('Signed Liability Waiver')) issues.push(BorrowerIssue.NeedsLiabilityWaiver);
     if (record.get('Overdue Loans') > 0) issues.push(BorrowerIssue.OverdueLoan);
     if (record.get('Suspended')) issues.push(BorrowerIssue.Suspended);
@@ -35,7 +35,8 @@ const fetchBorrowers = async () => {
             'Suspended', 
             'Overdue Loans', 
             'Dues Paid',
-            'Signed Liability Waiver'
+            'Signed Liability Waiver',
+            'transactions_past_year'
         ],
         pageSize: 100
     }).all();
