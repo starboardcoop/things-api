@@ -4,13 +4,15 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_KEY }).base(process.env
 const Table = {
     Inventory: 'Inventory',
     Borrowers: 'Members',
-    Loans: 'Loans'
+    Loans: 'Loans',
+    Payments: 'Transactions'
 };
 
 const BorrowerIssue = {
     DuesNotPaid: 'duesNotPaid',
     OverdueLoan: 'overdueLoan',
-    Suspended: 'suspended'
+    Suspended: 'suspended',
+    NeedsLiabilityWaiver: 'needsLiabilityWaiver'
 };
 
 module.exports = {

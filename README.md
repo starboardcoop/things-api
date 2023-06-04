@@ -5,6 +5,7 @@
 - lending / things
 - lending / borrowers
 - lending / loans
+- lending / payments
 
 ## Environment variables
 In order for the **Things API** to work, you'll need to set 3 environment variables in a `.env` file at the root of the project folder:
