@@ -8,7 +8,9 @@ const mapItem = (record) => {
         id: record.id,
         number: Number(record.get('ID')),
         name: record.get('Name')[0],
-        available: record.get('Active Loans') === 0
+        available: record.get('Active Loans') === 0,
+        brand: record.get('brand'),
+        totalLoans: record.get('Total Loans')
     };
 }
 
@@ -19,6 +21,17 @@ const mapThing = (record) => {
         name_es: record.get('name_es'),
         stock: Number(record.get('Stock')),
         available: Number(record.get('Available'))
+    };
+}
+
+const mapDetailedThing = (record, items) => {
+    return {
+        id: record.id,
+        name: record.get('Name'),
+        name_es: record.get('name_es'),
+        stock: Number(record.get('Stock')),
+        available: Number(record.get('Available')),
+        items
     };
 }
 
@@ -55,7 +68,15 @@ const fetchThings = async () => {
 
 const fetchThing = async ({ id }) => {
     const record = await things.find(id);
-    return record ? mapThing(record) : null;
+
+    const itemIds = record.get('Inventory');
+    const itemPromises = itemIds.map(id => {
+        return inventory.find(id)
+    });
+
+    const items = (await Promise.all(itemPromises)).map(mapItem);
+
+    return record ? mapDetailedThing(record, items) : null;
 }
 
 module.exports = {
