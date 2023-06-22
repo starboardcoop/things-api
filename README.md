@@ -3,6 +3,7 @@
 ## APIs
 - things
 - lending / things
+- lending / inventory
 - lending / borrowers
 - lending / loans
 - lending / payments
