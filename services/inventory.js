@@ -70,18 +70,29 @@ const fetchThing = async ({ id }) => {
     const record = await things.find(id);
 
     const itemIds = record.get('Inventory');
-    const itemPromises = itemIds.map(id => {
+
+    const itemPromises = itemIds?.map(id => {
         return inventory.find(id)
     });
 
-    const items = (await Promise.all(itemPromises)).map(mapItem);
+    const items = (await Promise.all(itemPromises || [])).map(mapItem);
 
     return record ? mapDetailedThing(record, items) : null;
+}
+
+const createThing = async ({ name, spanishName }) => {
+    const record = await things.create({
+        'Name': name,
+        name_es: spanishName
+    });
+
+    return record ? mapDetailedThing(record, []) : null;
 }
 
 module.exports = {
     fetchInventory,
     fetchInventoryItem,
     fetchThings,
-    fetchThing
+    fetchThing,
+    createThing
 };
