@@ -25,6 +25,7 @@ app.use('/things', things);
 app.use('/lending', lending);
 app.use('/auth', auth);
 
-app.listen(8088, () => {
-    console.log('Things API listening at http://localhost:8088');
+const PORT = process.env.PORT || 8088;
+app.listen(PORT, () => {
+    console.log(`PVD Things API listening on PORT ${PORT}...`);
 });
