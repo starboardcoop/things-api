@@ -105,11 +105,21 @@ const createThing = async ({ name, spanishName }) => {
     return record ? mapDetailedThing(record, []) : null;
 }
 
+const updateThing = async (id, { name, spanishName }) => {
+    const record = await things.update(id, {
+        'Name': name,
+        'name_es': spanishName
+    });
+
+    return mapDetailedThing(record);
+}
+
 module.exports = {
     fetchInventory,
     fetchInventoryItem,
     createInventoryItems,
     fetchThings,
     fetchThing,
-    createThing
+    createThing,
+    updateThing
 };
